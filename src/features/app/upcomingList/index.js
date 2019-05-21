@@ -1,33 +1,39 @@
 import React from 'react';
 import { Container, Header, TopView } from '@src/components';
 import { ScaledSheet } from 'rn-scaled-sheet';
-import TaskList from './components/TaskList';
+import TaskList from './components/UpcomingList';
 
 const data = [
   {
-    id: '1',
-    task: 'Read Type Guidelines',
-    isDone: false,
+    title: 'Tomorrow',
+    data: [{
+      id: '1',
+      task: 'Read Type Guidelines',
+      isDone: false,
+    },
+    {
+      id: '12',
+      task: 'Bring Groceries',
+      isDone: true,
+    }],
   },
   {
-    id: '12',
-    task: 'Bring Groceries',
-    isDone: true,
-  },
-  {
-    id: '13',
-    task: 'Talk to Pamela and Betty',
-    isDone: true,
-  },
-  {
-    id: '14',
-    task: 'Take Muffy for walk',
-    isDone: false,
-  },
-  {
-    id: '15',
-    task: 'Complete Responsive Design',
-    isDone: false,
+    title: '12/1/2019',
+    data: [{
+      id: '13',
+      task: 'Talk to Pamela and Betty',
+      isDone: true,
+    },
+    {
+      id: '14',
+      task: 'Take Muffy for walk',
+      isDone: false,
+    },
+    {
+      id: '15',
+      task: 'Complete Responsive Design',
+      isDone: false,
+    }],
   }
 ];
 
@@ -37,13 +43,13 @@ class TaskListScreen extends React.Component {
     return (
       <Container>
         <Header
-          title='TO-DO'
+          title='SCHEDULER'
           leftIcon='ios-menu'
           rightIcon='ios-search'
           shadow
         />
         <TopView
-          title={'Today’s\nlist —'}
+          title={'Upcoming\ntasks —'}
         />
         <TaskList
           data={data}

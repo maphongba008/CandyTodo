@@ -6,3 +6,4 @@ export { default as TouchableOpacity } from './TouchableOpacity';
 export { default as Input } from './Input';
 export { default as TopView } from './TopView';
 export { default as Checkbox } from './Checkbox';
+export { default as Todo } from './Todo';
