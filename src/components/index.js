@@ -4,3 +4,5 @@ export { default as Icon } from './Icon';
 export { default as Text } from './Text';
 export { default as TouchableOpacity } from './TouchableOpacity';
 export { default as Input } from './Input';
+export { default as TopView } from './TopView';
+export { default as Checkbox } from './Checkbox';

@@ -17,27 +17,10 @@ type Props = {
   onPressRight?: () => void;
   onPressLeft?: () => void;
   backEnabled?: boolean;
-  hide?: boolean;
+  shadow?: boolean;
 }
 
 export default class extends React.PureComponent<Props> {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      animation: new Animated.Value(props.hide ? 1 : 0),
-    };
-  }
-
-  componentWillReceiveProps = (nextProps) => {
-    if (this.props.hide !== nextProps.hide) {
-      Animated.timing(this.state.animation, {
-        toValue: nextProps.hide ? 1 : 0,
-        duration: 250,
-        easing: Easing.quad,
-      }).start();
-    }
-  };
 
   _onPressLeft = () => {
     const { backEnabled, onPressLeft } = this.props;
@@ -57,22 +40,14 @@ export default class extends React.PureComponent<Props> {
       leftIcon,
       backEnabled,
       rightIconStyle,
+      shadow,
     } = this.props;
     const Tag = leftIcon || backEnabled ? TouchableOpacity : View;
 
-    const animatedStyle = {
-      transform: [
-        {
-          translateY: this.state.animation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, -100],
-          }),
-        }
-      ],
-    };
+    const shadowStyle = shadow ? styles.shadow : undefined;
 
     return (
-      <Animated.View style={[styles.containerSmall, style, animatedStyle]}>
+      <View style={[styles.containerSmall, style, shadowStyle]}>
         <Tag onPress={this._onPressLeft} style={styles.leftView}>
           {(!!leftIcon || backEnabled) && <Icon darkSlateBlue style={styles.leftIcon} f25 name={backEnabled ? 'arrow-back' : leftIcon} />}
         </Tag>
@@ -80,7 +55,7 @@ export default class extends React.PureComponent<Props> {
         <TouchableOpacity style={styles.rightView} onPress={onPressRight} disabled={!rightIcon}>
           {!!rightIcon && <Icon f25 darkSlateBlue style={[styles.icon, rightIconStyle]} name={rightIcon} />}
         </TouchableOpacity>
-      </Animated.View>
+      </View>
     );
   }
 
@@ -111,8 +86,6 @@ const styles = ScaledSheet.create({
     justifyContent: 'center',
   },
   icon: {
-    fontSize: 25,
-    color: '#FFF',
     marginRight: 15,
   },
   // small
@@ -134,8 +107,13 @@ const styles = ScaledSheet.create({
     textAlign: 'center',
   },
   shadow: {
-    borderBottomColor: 'rgba(0, 0, 0, 0.3)',
-    borderBottomWidth: 0.5,
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 4,
+    // },
+    // shadowRadius: 7,
+    // shadowOpacity: 1,
     elevation: 1,
   },
   leftIcon: {
