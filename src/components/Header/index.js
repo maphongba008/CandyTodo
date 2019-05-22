@@ -49,7 +49,7 @@ export default class extends React.PureComponent<Props> {
     return (
       <View style={[styles.containerSmall, style, shadowStyle]}>
         <Tag onPress={this._onPressLeft} style={styles.leftView}>
-          {(!!leftIcon || backEnabled) && <Icon darkSlateBlue style={styles.leftIcon} f25 name={backEnabled ? 'arrow-back' : leftIcon} />}
+          {(!!leftIcon || backEnabled) && <Icon darkSlateBlue style={styles.leftIcon} f25 name={backEnabled ? 'md-arrow-back' : leftIcon} />}
         </Tag>
         <Text f15 fontBlack darkSlateBlue style={[styles.title, styles.titleSmall]}>{title}</Text>
         <TouchableOpacity style={styles.rightView} onPress={onPressRight} disabled={!rightIcon}>

@@ -55,7 +55,10 @@ export default class extends React.PureComponent {
             })
           }
         </View>
-        <TouchableOpacity style={styles.addButton}>
+        <TouchableOpacity
+          onPress={() => NavigationService.navigate(Screens.CREATE_TASK)}
+          style={styles.addButton}
+        >
           <Icon name='ios-add' white f25 />
         </TouchableOpacity>
       </View>

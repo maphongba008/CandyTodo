@@ -7,7 +7,10 @@ import {
 } from '@src/components';
 import { ScaledSheet } from 'rn-scaled-sheet';
 import Sizes from '@src/constants/Sizes';
-import Avatar from '@src/assets/icons/avatar.jpg';
+import AppStore from '@src/features/stores/AppStore';
+import { observer } from 'mobx-react';
+import NavigationService from '@src/navigation/NavigationService';
+import Screens from '@src/navigation/Screens';
 
 type Props = {
   text?: string;
@@ -36,19 +39,21 @@ class Row extends React.PureComponent<Props> {
 class ProfileScreen extends React.Component {
 
   render() {
+    const user = AppStore.user;
     return (
       <Container>
         <Header
           title='PROFILE'
           leftIcon='ios-menu'
           rightIcon='ios-create'
+          onPressRight={() => NavigationService.navigate(Screens.UPDATE_PROFILE_SCREEN)}
           shadow
         />
         <TopView>
-          <Image source={Avatar} style={styles.image} />
+          <Image source={{ uri: user.avatar }} style={styles.image} />
           <View style={styles.nameView}>
-            <Text fontBlack f24 darkSlateBlue>Tiffany Schneider</Text>
-            <Text fontBook f12 darkSlateBlue>tiffany.s@email.com</Text>
+            <Text fontBlack f24 darkSlateBlue>{user.fullName}</Text>
+            <Text fontBook f12 darkSlateBlue>{user.email}</Text>
           </View>
         </TopView>
         <ScrollView style={styles.scrollView}>
@@ -113,4 +118,4 @@ const styles = ScaledSheet.create({
   },
 });
 
-export default ProfileScreen;
+export default observer(ProfileScreen);

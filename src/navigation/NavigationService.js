@@ -1,4 +1,5 @@
 import { NavigationActions } from 'react-navigation';
+import Emitter from '@src/utils/Emitter';
 
 let _navigator = null;
 
@@ -12,17 +13,34 @@ function back() {
 
 function navigate(routeName, params) {
   //
-  console.log("-- NAVIGATION TO -- ", routeName);
+  console.log('-- NAVIGATION TO -- ', routeName);
   _navigator.dispatch(
     NavigationActions.navigate({
       routeName,
-      params
+      params,
     })
   );
+}
+
+
+function openDrawer() {
+  Emitter.notify(Emitter.Keys.OpenDrawer);
+}
+
+function closeDrawer() {
+  Emitter.notify(Emitter.Keys.CloseDrawer);
+}
+
+function navigateAndCloseDrawer(routeName, params) {
+  navigate(routeName, params);
+  closeDrawer();
 }
 
 export default {
   setTopLevelNavigator,
   back,
   navigate,
-}
+  openDrawer,
+  closeDrawer,
+  navigateAndCloseDrawer,
+};

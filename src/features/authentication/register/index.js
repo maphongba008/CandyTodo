@@ -14,7 +14,13 @@ import Screens from '@src/navigation/Screens';
 
 export default class extends React.Component {
 
-  _onPressRegister = () => {
+  state = {
+    email: '',
+    password: '',
+    confirmPassword: '',
+  }
+
+  _onPressRegister = async () => {
     NavigationService.navigate(Screens.APP_STACK);
   }
 

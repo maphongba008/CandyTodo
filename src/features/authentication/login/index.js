@@ -10,8 +10,26 @@ import Colors from '@src/constants/Colors';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import NavigationService from '@src/navigation/NavigationService';
 import Screens from '@src/navigation/Screens';
+import AppStore from '@src/features/stores/AppStore';
 
 export default class extends React.Component {
+
+  state = {
+    email: '',
+    password: '',
+  }
+
+  _onPressLogin = async () => {
+    const { email, password } = this.state;
+    AppStore.showLoading();
+    const error = await AppStore.login(email, password);
+    AppStore.hideLoading();
+    if (error) {
+      alert(error.message);
+      return;
+    }
+    NavigationService.navigate(Screens.APP_STACK);
+  }
 
   _onPressRegister = () => {
     NavigationService.navigate(Screens.REGISTER_SCREEN);
@@ -35,12 +53,12 @@ export default class extends React.Component {
             title='Password'
             style={styles.passwordInput}
             rightText='Forgot?'
-            onRightButtonPress={() => alert('123123')}
+            onRightButtonPress={() => alert('TODO')}
             inputProps={{
               secureTextEntry: true,
             }}
           />
-          <TouchableOpacity style={styles.loginButton}>
+          <TouchableOpacity onPress={this._onPressLogin} style={styles.loginButton}>
             <Text white f14 fontHeavy style={styles.loginText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.registerButton} onPress={this._onPressRegister}>
