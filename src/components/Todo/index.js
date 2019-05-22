@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
-import { Checkbox, Text, TouchableOpacity } from '@src/components';
+import { View } from 'react-native';
 import { ScaledSheet } from 'rn-scaled-sheet';
 import Sizes from '@src/constants/Sizes';
+import Text from '../Text';
+import Checkbox from '../Checkbox';
 
 export default class Todo extends React.PureComponent {
 
