@@ -61,8 +61,8 @@ export default class extends React.Component {
   }
 
   _onNavigationStateChange = (_, nextState: NavigationState) => {
-    const currentStack = nextState.routes[nextState.index];
-    const drawerEnabled = currentStack.key === Screens.APP_STACK;
+    const currentStack = nextState.routes[0].routes[nextState.routes[0].index];
+    const drawerEnabled = nextState.index === 0 && currentStack.key === Screens.APP_STACK;
     this.setState({ drawerEnabled });
   }
 
