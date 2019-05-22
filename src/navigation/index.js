@@ -11,6 +11,7 @@ import NotificationListScreen from '@src/features/app/notifications';
 import ProfileScreen from '@src/features/app/profile';
 import Screens from './Screens';
 import NavigationService from './NavigationService';
+import Tabbar from './Tabbar';
 // import IntroScreen from '../features/app/intro';
 
 const AuthenStack = createStackNavigator({
@@ -26,6 +27,7 @@ const AppStack = createBottomTabNavigator({
   [Screens.NOTIFICATIONS_SCREEN]: NotificationListScreen,
   [Screens.PROFILE_SCREEN]: ProfileScreen,
 }, {
+  tabBarComponent: props => <Tabbar {...props} />,
 });
 
 const App = createSwitchNavigator({

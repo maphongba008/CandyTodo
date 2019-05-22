@@ -13,6 +13,7 @@ type Props = {
   f20?: boolean;
   f25?: boolean;
   f40?: boolean;
+  o5?: boolean;
 }
 
 export default class extends React.PureComponent<Props> {
@@ -40,5 +41,8 @@ const styles = ScaledSheet.create({
   },
   darkSlateBlue: {
     color: Colors.darkSlateBlue,
+  },
+  o5: {
+    opacity: 0.5,
   },
 });
