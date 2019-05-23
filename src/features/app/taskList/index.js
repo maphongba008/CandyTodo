@@ -1,37 +1,14 @@
 import React from 'react';
 import { Container, Header, TopView } from '@src/components';
 import { ScaledSheet } from 'rn-scaled-sheet';
+import AppStore from '@src/features/stores/AppStore';
 import TaskList from './components/TaskList';
 
-const data = [
-  {
-    id: '1',
-    task: 'Read Type Guidelines',
-    isDone: false,
-  },
-  {
-    id: '12',
-    task: 'Bring Groceries',
-    isDone: true,
-  },
-  {
-    id: '13',
-    task: 'Talk to Pamela and Betty',
-    isDone: true,
-  },
-  {
-    id: '14',
-    task: 'Take Muffy for walk',
-    isDone: false,
-  },
-  {
-    id: '15',
-    task: 'Complete Responsive Design',
-    isDone: false,
-  }
-];
-
 class TaskListScreen extends React.Component {
+
+  _onPressTodo = (todo) => {
+    todo.toggle();
+  }
 
   render() {
     return (
@@ -46,7 +23,8 @@ class TaskListScreen extends React.Component {
           title={'Today’s\nlist —'}
         />
         <TaskList
-          data={data}
+          onPressItem={this._onPressTodo}
+          data={AppStore.todayTasks}
           style={styles.list}
         />
       </Container>

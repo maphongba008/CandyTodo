@@ -13,6 +13,7 @@ export default class extends React.PureComponent {
     return (
       <FlatList
         data={data}
+        extraData={data.length}
         style={style}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}

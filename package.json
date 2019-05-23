@@ -8,6 +8,7 @@
     "ios": "react-native run-ios --simulator='iPhone 6'"
   },
   "dependencies": {
+    "lodash": "^4.17.11",
     "mobx": "4.6.0",
     "mobx-react": "5.4.2",
     "mobx-state-tree": "^3.14.0",

@@ -2,10 +2,11 @@ import React from 'react';
 import { View } from 'react-native';
 import { ScaledSheet } from 'rn-scaled-sheet';
 import Sizes from '@src/constants/Sizes';
+import { observer } from 'mobx-react';
 import Text from '../Text';
 import Checkbox from '../Checkbox';
 
-export default class Todo extends React.PureComponent {
+class Todo extends React.Component {
 
   render() {
     const item = this.props.data;
@@ -36,3 +37,5 @@ const styles = ScaledSheet.create({
     flex: 1,
   },
 });
+
+export default observer(Todo);

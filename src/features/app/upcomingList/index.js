@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Header, TopView } from '@src/components';
 import { ScaledSheet } from 'rn-scaled-sheet';
+import AppStore from '@src/features/stores/AppStore';
 import TaskList from './components/UpcomingList';
 
 const data = [
@@ -39,6 +40,10 @@ const data = [
 
 class TaskListScreen extends React.Component {
 
+  _onPressTodo = (todo) => {
+    todo.toggle();
+  }
+
   render() {
     return (
       <Container>
@@ -52,8 +57,9 @@ class TaskListScreen extends React.Component {
           title={'Upcoming\ntasks —'}
         />
         <TaskList
-          data={data}
+          data={AppStore.sectionUpcomingTasks}
           style={styles.list}
+          onPressItem={this._onPressTodo}
         />
       </Container>
     );
