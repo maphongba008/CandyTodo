@@ -48,8 +48,8 @@ export const notifications = [
     id: '2',
     text: 'A new update is available! [Update] now',
     createdAt: new Date().getTime(),
-    linkAndroid: 'market://details?id=com.google.android.apps.maps',
-    linkIOS: 'itms://itunes.apple.com/us/app/apple-store/myiosappid?mt=8',
+    linkAndroid: 'market://details?id=com.candytodo',
+    linkIOS: 'https://itunes.apple.com/app/id1465072530',
   },
   {
     id: '3',

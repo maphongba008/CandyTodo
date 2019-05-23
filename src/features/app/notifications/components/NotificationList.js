@@ -18,7 +18,7 @@ class Item extends React.PureComponent {
 
   _onPress = () => {
     const notification = this.props.data;
-    const url = isAndroid ? notification.androidUrl : notification.iosUrl;
+    const url = isAndroid ? notification.linkAndroid : notification.linkIOS;
     Linking.canOpenURL(url).then((canOpen) => {
       if (canOpen) {
         Linking.openURL(url);
