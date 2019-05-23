@@ -1,4 +1,5 @@
 import React from 'react';
+import { Dimensions } from 'react-native';
 import {
   createAppContainer, createSwitchNavigator, createStackNavigator, createBottomTabNavigator, NavigationState
 } from 'react-navigation';
@@ -19,6 +20,8 @@ import Tabbar from './Tabbar';
 import Drawer from './Drawer';
 import LoadingView from './LoadingView';
 // import IntroScreen from '../features/app/intro';
+
+const { width } = Dimensions.get('window');
 
 const AuthenStack = createStackNavigator({
   [Screens.LOGIN_SCREEN]: LoginScreen,
@@ -79,7 +82,7 @@ export default class extends React.Component {
   render() {
     return (
       <DrawerLayout
-        drawerWidth={200}
+        drawerWidth={width * 3 / 4}
         drawerPosition='left'
         drawerType='slide'
         edgeWidth={60}

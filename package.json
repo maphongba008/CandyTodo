@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "ios": "react-native run-ios --simulator='iPhone 6'"
+    "ios": "react-native run-ios --simulator='iPhone 6'",
+    "release-android": "cd android && ./gradlew assembleRelease && cd .."
   },
   "dependencies": {
     "lodash": "^4.17.11",
