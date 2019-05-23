@@ -31,6 +31,12 @@ export default class extends React.Component {
     NavigationService.navigate(Screens.APP_STACK);
   }
 
+
+  _isLoginEnable = () => {
+    const { email, password } = this.state;
+    return !!email && !!password;
+  }
+
   _onPressRegister = () => {
     NavigationService.navigate(Screens.REGISTER_SCREEN);
   }
@@ -47,6 +53,8 @@ export default class extends React.Component {
             style={styles.emailInput}
             inputProps={{
               keyboardType: 'email-address',
+              value: this.state.email,
+              onChangeText: email => this.setState({ email }),
             }}
           />
           <Input
@@ -56,9 +64,15 @@ export default class extends React.Component {
             onRightButtonPress={() => alert('TODO')}
             inputProps={{
               secureTextEntry: true,
+              value: this.state.password,
+              onChangeText: password => this.setState({ password }),
             }}
           />
-          <TouchableOpacity onPress={this._onPressLogin} style={styles.loginButton}>
+          <TouchableOpacity
+            onPress={this._onPressLogin}
+            style={styles.loginButton}
+            disabled={!this._isLoginEnable()}
+          >
             <Text white f14 fontHeavy style={styles.loginText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.registerButton} onPress={this._onPressRegister}>

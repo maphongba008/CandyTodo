@@ -1,11 +1,30 @@
 import React from 'react';
-import { SectionList, View, Image } from 'react-native';
+import {
+  SectionList, View, Image, Linking, Platform
+} from 'react-native';
 import { Text } from '@src/components';
 import { ScaledSheet } from 'rn-scaled-sheet';
 import Sizes from '@src/constants/Sizes';
 import IconInfo from '@src/assets/icons/ic_notification.png';
+import Fonts from '@src/constants/Fonts';
+import Colors from '@src/constants/Colors';
+import ParsedText from 'react-native-parsed-text';
+
+const isAndroid = Platform.OS === 'android';
 
 class Item extends React.PureComponent {
+
+  _renderText = text => text.slice(1, text.length - 1)
+
+  _onPress = () => {
+    const notification = this.props.data;
+    const url = isAndroid ? notification.androidUrl : notification.iosUrl;
+    Linking.canOpenURL(url).then((canOpen) => {
+      if (canOpen) {
+        Linking.openURL(url);
+      }
+    });
+  }
 
   render() {
     const notification = this.props.data;
@@ -14,7 +33,21 @@ class Item extends React.PureComponent {
         style={styles.container}
       >
         <Image source={IconInfo} style={styles.checkbox} />
-        <Text f12 darkSlateBlue style={styles.text}>{notification.text}</Text>
+        <ParsedText
+          style={styles.text}
+          parse={
+            [
+              {
+                pattern: /\[.*?\]/i,
+                style: [styles.highlight],
+                renderText: this._renderText,
+                onPress: this._onPress,
+              }
+            ]
+          }
+        >
+          {notification.text}
+        </ParsedText>
       </View>
     );
   }
@@ -33,6 +66,13 @@ const styles = ScaledSheet.create({
   },
   text: {
     flex: 1,
+    fontSize: 12,
+    fontFamily: Fonts.BOOK,
+    color: Colors.darkSlateBlue,
+  },
+  highlight: {
+    fontFamily: Fonts.BLACK,
+    textDecorationLine: 'underline',
   },
   header: {
     marginTop: 16,

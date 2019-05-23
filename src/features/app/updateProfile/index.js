@@ -9,6 +9,7 @@ import { ScaledSheet, scaleSmart } from 'rn-scaled-sheet';
 import Sizes from '@src/constants/Sizes';
 import Colors from '@src/constants/Colors';
 import Fonts from '@src/constants/Fonts';
+import NavigationService from '@src/navigation/NavigationService';
 
 const { width } = Dimensions.get('window');
 
@@ -23,6 +24,17 @@ export default class extends React.PureComponent {
       name: '',
       email: AppStore.user.email,
     };
+  }
+
+  _isSaveEnabled = () => {
+    const { name, email } = this.state;
+    return !!name && !!email;
+  }
+
+  _onPressSave = () => {
+    const { name, email } = this.state;
+    AppStore.user.update(name, email);
+    NavigationService.back();
   }
 
   render() {
@@ -53,7 +65,11 @@ export default class extends React.PureComponent {
               onChangeText: email => this.setState({ email }),
             }}
           />
-          <TouchableOpacity style={styles.doneButton}>
+          <TouchableOpacity
+            disabled={!this._isSaveEnabled()}
+            style={styles.doneButton}
+            onPress={this._onPressSave}
+          >
             <Icon name='ios-checkmark' white f25 />
           </TouchableOpacity>
         </View>

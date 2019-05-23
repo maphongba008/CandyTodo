@@ -17,7 +17,6 @@ export default class extends React.PureComponent {
 
   render() {
     const { data, style } = this.props;
-    console.log('sections', data);
     return (
       <SectionList
         sections={data}

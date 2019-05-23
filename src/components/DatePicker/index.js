@@ -63,7 +63,7 @@ export default class extends React.Component<Props> {
           style={[styles.view]}
           onPress={this._onPressSelectDate}
         >
-          <Text f12 darkSlateBlue o5={!value}>{value ? moment(value).format() : placeholder}</Text>
+          <Text f12 darkSlateBlue o5={!value}>{value ? moment(value).format('DD/MM/YYYY') : placeholder}</Text>
         </TouchableOpacity>
         <DatePickerModal
           visible={this.state.showModal}

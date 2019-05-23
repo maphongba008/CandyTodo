@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container, Header, TopView } from '@src/components';
 import { ScaledSheet } from 'rn-scaled-sheet';
+import NavigationService from '@src/navigation/NavigationService';
+import AppStore from '@src/features/stores/AppStore';
 import TaskList from './components/NotificationList';
 
 const data = [
@@ -40,6 +42,7 @@ class NotificationsScreen extends React.Component {
         <Header
           title='NOTIFICATIONS'
           leftIcon='ios-menu'
+          onPressLeft={NavigationService.openDrawer}
           rightIcon='ios-search'
           shadow
         />
@@ -47,7 +50,7 @@ class NotificationsScreen extends React.Component {
           title={'Alerts &\nUpdates —'}
         />
         <TaskList
-          data={data}
+          data={AppStore.sectionNotifications}
           style={styles.list}
         />
       </Container>

@@ -40,11 +40,13 @@ class ProfileScreen extends React.Component {
 
   render() {
     const user = AppStore.user;
+    const setting = user.setting;
     return (
       <Container>
         <Header
           title='PROFILE'
           leftIcon='ios-menu'
+          onPressLeft={NavigationService.openDrawer}
           rightIcon='ios-create'
           onPressRight={() => NavigationService.navigate(Screens.UPDATE_PROFILE_SCREEN)}
           shadow
@@ -60,16 +62,24 @@ class ProfileScreen extends React.Component {
           <Text o5 f12 darkSlateBlue style={styles.title}>Notification Settings</Text>
           <Row
             text='Get email notifications'
+            value={setting.emailNotification}
+            onValueChange={setting.setEmailNotification}
           />
           <Row
             text='Vibrate on alert'
+            value={setting.vibrateOnAlert}
+            onValueChange={setting.setVibrateOnAlert}
           />
           <Text o5 f12 darkSlateBlue style={styles.title}>Floss Settings</Text>
           <Row
             text='Share profile with other floss users'
+            value={setting.shareProfile}
+            onValueChange={setting.setShareProfile}
           />
           <Row
             text='Show your task completion status'
+            value={setting.showTaskCompletionStatus}
+            onValueChange={setting.setShowTaskCompletionStatus}
           />
         </ScrollView>
       </Container>

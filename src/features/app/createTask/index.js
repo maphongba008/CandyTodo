@@ -12,6 +12,8 @@ import { ScaledSheet, scaleSmart } from 'rn-scaled-sheet';
 import Sizes from '@src/constants/Sizes';
 import Colors from '@src/constants/Colors';
 import Fonts from '@src/constants/Fonts';
+import AppStore from '@src/features/stores/AppStore';
+import NavigationService from '@src/navigation/NavigationService';
 
 const { width } = Dimensions.get('window');
 
@@ -69,6 +71,24 @@ export default class extends React.Component {
     notification: false,
   }
 
+  _isSaveEnabled = () => {
+    const {
+      task, completeBy, priority, alarm, notification,
+    } = this.state;
+    if (!task || !completeBy || !priority) {
+      return false;
+    }
+    return true;
+  }
+
+  _onPressSave = () => {
+    const {
+      task, completeBy, priority, alarm, notification,
+    } = this.state;
+    AppStore.createTask(task, completeBy.getTime(), priority.key, alarm, notification);
+    NavigationService.back();
+  }
+
   render() {
     return (
       <Container>
@@ -115,7 +135,7 @@ export default class extends React.Component {
             onValueChange={notification => this.setState({ notification })}
           />
         </ScrollView>
-        <TouchableOpacity style={styles.doneButton}>
+        <TouchableOpacity disabled={!this._isSaveEnabled()} onPress={this._onPressSave} style={styles.doneButton}>
           <Icon name='ios-checkmark' white f25 />
         </TouchableOpacity>
       </Container>

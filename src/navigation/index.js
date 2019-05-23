@@ -17,6 +17,7 @@ import Screens from './Screens';
 import NavigationService from './NavigationService';
 import Tabbar from './Tabbar';
 import Drawer from './Drawer';
+import LoadingView from './LoadingView';
 // import IntroScreen from '../features/app/intro';
 
 const AuthenStack = createStackNavigator({
@@ -95,6 +96,7 @@ export default class extends React.Component {
           onNavigationStateChange={this._onNavigationStateChange}
           {...this.props}
         />
+        <LoadingView />
       </DrawerLayout>
     );
   }

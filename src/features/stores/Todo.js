@@ -1,7 +1,7 @@
 import { types } from 'mobx-state-tree';
 import moment from 'moment';
 
-const Status = {
+export const Status = {
   TODO: 'TODO',
   DONE: 'DONE',
 };
@@ -11,6 +11,7 @@ const Todo = types.model('Todo', {
   task: types.string,
   status: types.string,
   completeBy: types.number,
+  priority: types.string,
 }).views(self => ({
   get isDone() {
     return self.status === Status.DONE;

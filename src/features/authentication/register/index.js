@@ -11,6 +11,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import NavigationService from '@src/navigation/NavigationService';
 import ParsedText from 'react-native-parsed-text';
 import Screens from '@src/navigation/Screens';
+import AppStore from '@src/features/stores/AppStore';
 
 export default class extends React.Component {
 
@@ -20,16 +21,29 @@ export default class extends React.Component {
     confirmPassword: '',
   }
 
-  _onPressRegister = async () => {
-    NavigationService.navigate(Screens.APP_STACK);
-  }
-
   _onPressLogin = () => {
     NavigationService.back();
   }
 
   _onPolicyPress = () => {
 
+  }
+
+  _isRegisterEnable = () => {
+    const { email, password, confirmPassword } = this.state;
+    return !!email && !!password && !!confirmPassword && password === confirmPassword;
+  }
+
+  _onPressRegister = async () => {
+    const { email, password } = this.state;
+    AppStore.showLoading();
+    const error = await AppStore.register(email, password);
+    AppStore.hideLoading();
+    if (!error) {
+      NavigationService.navigate(Screens.APP_STACK);
+    } else {
+      alert(error.message);
+    }
   }
 
   _renderText = text => text.slice(1, text.length - 1)
@@ -46,6 +60,8 @@ export default class extends React.Component {
             style={styles.emailInput}
             inputProps={{
               keyboardType: 'email-address',
+              value: this.state.email,
+              onChangeText: email => this.setState({ email }),
             }}
           />
           <Input
@@ -53,6 +69,8 @@ export default class extends React.Component {
             style={styles.passwordInput}
             inputProps={{
               secureTextEntry: true,
+              value: this.state.password,
+              onChangeText: password => this.setState({ password }),
             }}
           />
           <Input
@@ -60,9 +78,15 @@ export default class extends React.Component {
             style={styles.confirmPasswordInput}
             inputProps={{
               secureTextEntry: true,
+              value: this.state.confirmPassword,
+              onChangeText: confirmPassword => this.setState({ confirmPassword }),
             }}
           />
-          <TouchableOpacity style={styles.registerButton} onPress={this._onPressRegister}>
+          <TouchableOpacity
+            style={styles.registerButton}
+            onPress={this._onPressRegister}
+            disabled={!this._isRegisterEnable()}
+          >
             <Text white f14 fontHeavy style={styles.registerText}>Register</Text>
           </TouchableOpacity>
           <ParsedText

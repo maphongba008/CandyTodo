@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Image, ScrollView } from 'react-native';
+import {
+  View, Image, ScrollView, Alert
+} from 'react-native';
 import { TouchableOpacity, Text } from '@src/components';
 import { ScaledSheet } from 'rn-scaled-sheet';
 import AppStore from '@src/features/stores/AppStore';
@@ -52,7 +54,21 @@ const Items = [
 export default class extends React.Component {
 
   _onPressLogout = () => {
-
+    NavigationService.closeDrawer();
+    Alert.alert('Logout', 'Do you want to logout?', [
+      {
+        text: 'Logout',
+        style: 'destructive',
+        onPress: () => {
+          AppStore.logout();
+          NavigationService.navigate(Screens.LOGIN_SCREEN);
+        },
+      },
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      }
+    ]);
   }
 
   render() {
