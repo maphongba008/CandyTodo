@@ -14,7 +14,7 @@ export default class {
           showTaskCompletionStatus: true,
         },
       });
-    }, 1000);
+    }, 300);
   })
 
   static register = (email, password) => new Promise((resolve) => {
@@ -31,7 +31,7 @@ export default class {
           showTaskCompletionStatus: true,
         },
       });
-    }, 1000);
+    }, 300);
   })
 
   static logout = () => new Promise((resolve) => {

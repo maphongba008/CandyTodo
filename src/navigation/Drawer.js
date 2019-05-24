@@ -105,6 +105,7 @@ export default class extends React.Component {
 const styles = ScaledSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   headerView: {
     flexDirection: 'row',

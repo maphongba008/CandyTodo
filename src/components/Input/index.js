@@ -33,6 +33,7 @@ export default class extends React.Component<Props> {
         </View>
         <TextInput
           placeholder={placeholder}
+          autoCapitalize='none'
           underlineColorAndroid='transparent'
           {...inputProps}
           style={[styles.input, inputStyle]}
